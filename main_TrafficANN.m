@@ -5,7 +5,8 @@
 
 % --------------------------------------------------------------------------------------
 % by: AP Palacz @ DTU-Aqua
-% last modified: 17 Dec 2015
+% by: M St. John @ DTU-Aqua
+% last modified: 18 Dec 2015
 % --------------------------------------------------------------------------------------
 % 24 Jul 2014: created the first version of the programme
 % 16 Oct 2014: added classifier diversity estimate
