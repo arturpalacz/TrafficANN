@@ -5,7 +5,7 @@
 
 % --------------------------------------------------------------------------------------
 % by: AP Palacz @ DTU-Aqua
-% by: M St. John @ DTU-Aqua
+% by: MA St. John @ DTU-Aqua
 % last modified: 18 Dec 2015
 % --------------------------------------------------------------------------------------
 % 24 Jul 2014: created the first version of the programme
@@ -28,7 +28,8 @@ global DIR % global variables i.e. read by every subroutine
 
 % -------------- MAKE CHANGES HERE !!! -------------------------------------------------
 % Specify the input directory for all data files:
-DIR = '/home/arpa/Documents/DTU/projects/EURO-BASIN/Traffic_Light_Model/' ;
+% DIR = '/home/arpa/Documents/DTU/projects/EURO-BASIN/Traffic_Light_Model/' ;
+DIR = '/Volumes/n-faelles/Mike_and_Artur_AI/TrafficANN/';
 %
 % DIR = '.../N-faelles/PalaczAP/traffic/ '; % all the data used for my Machine
 % Learning analysis is backed up at the N-Drive under /PalaczAP folder
@@ -104,7 +105,7 @@ if strcmp(data_type,'raw') == 1
                 [], breaks ) ;
         end
         
-        indicators.values = temp2 ;
+        indicators.values = double ( temp2 ) ;
         clear breaks temp temp2 p ;
         
     end
@@ -184,7 +185,7 @@ featSelect_opts = { 1, 'corrmap' , 'Correlation map'     ; ...
                     3, 'all'     , 'All inputs'          ; ...
                     4, 'complete', 'Complete only'       ; ...
                     5, 'random5' , 'Random 5'            ; ...
-                    6, 'pca1'    , '6 highest PCA1'      ; ...
+                    6, 'pca1'    , '5 highest PCA1'      ; ...
                     7, 'expert5' , 'expert 5 selected '  } ;
 
 disp ( featSelect_opts ) ;
@@ -310,18 +311,26 @@ for n = 1 : nReg ;
     
     title(['Regime',num2str(n)],'FontSize',fs+2)
     ylim([0 6]); xlim([0 nFeat+1]);
-    set(gca,'xtick',(1:nFeat),'xticklabel',indicators2.labels,'ytick',(1:5),...
+    set(gca,'xtick',(1:nFeat),'xticklabel',indicators2.labels,...
+        'xticklabelrotation',25,'ytick',(1:5),...
         'fontsize',fs,'box','off');
-    XYrotalabel(25,0);
     ylabel('mode quantile value','FontSize',fs+4);
 
 end
-%figdir = '/home/arpa/Documents/DTU/projects/EURO-BASIN/Traffic_Light_Model/';
-%export_fig ( [figdir, 'GoR_regimes',num2str(nReg),'_features',num2str(nFeat)], '-pdf' , '-native')
+% pwd stands for current folder
+export_fig ( [pwd, 'GoR_regimes',num2str(nReg),'_features',num2str(nFeat)], '-tif')
 
 %% Simple DSS tool prototype
 switch how_features
     
+    case 5 % random 5
+        
+        DSS ( nets, indicators2.labels) ;
+
+    case 6 % 5 highest PCA1 values
+       
+        DSS ( nets, indicators2.labels) ;
+
     case 7 % 5 expert-chosen indicators
         
         DSS ( nets, indicators2.labels) ;

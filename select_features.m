@@ -96,13 +96,13 @@ switch mode
         index = randperm(N);
         idx = index(1:k) ;
         
-        features.values = X(idx) ;
+        features.values = X(:,idx) ;
         
     case 'pca1'
         
         N = size(X,2) ;
         
-        idx = [1:3 N-2:N] ; % first three and last three, i.e. with highest positive and negative PCA scores
+        idx = [1:3 N-1:N] ; % first three and last three, i.e. with highest positive and negative PCA scores
         
         features.values = X ( : , idx ) ; % 3 most positive PC1 and 3 most negative PC1
 

@@ -57,7 +57,7 @@ handles.nets   = varargin{1};
 handles.labels = varargin{2};
 handles.inputs = ones(size(handles.labels)) ;
 
-[ ~, ~, handles.enZscore ] = applyANNensemble ( handles.inputs', handles.nets) ;
+[ ~, ~, handles.enZscore ] = apply_ANNensemble ( handles.inputs', handles.nets) ;
  
 handles.regimes = handles.enZscore.mean ;
  
@@ -266,7 +266,7 @@ set(handles.axes1, 'XLim', [0.5 5.5], 'YLim', [0.5 5.5],...
     'xticklabel',handles.labels,...
     'xticklabelrotation',15);
 
-[ ~, handles.enZ, handles.enZscore ] = applyANNensemble ( handles.inputs, handles.nets) ;
+[ ~, handles.enZ, handles.enZscore ] = apply_ANNensemble ( handles.inputs, handles.nets) ;
 %disp(handles.params.enZscore.mean);
 handles.regimes = handles.enZscore.mean;
 
